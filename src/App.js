@@ -40,6 +40,7 @@ function App() {
           <BrowserRouter>
           <Switch>
             {/* <Route path="/create account" exact component={Createac} /> */}
+            <Route path="/" exact component={Login} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/form" component={Form}/>
