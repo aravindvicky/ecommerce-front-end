@@ -13,6 +13,7 @@
   }
 }
 
+
 .App-header {
   background-color: #e2e7f1;
   min-height: 100vh;
@@ -24,9 +25,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +33,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nvb {
+  text-decoration: none;
+  /* border: 1px solid; */
+  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-radius: 10px;
+  color: black;
+
+
+}
+a:hover {
+  color: rgb(66, 39, 53);
+
 }

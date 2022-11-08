@@ -1,56 +1,106 @@
-// import logo from './logo.svg';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Link, BrowserRouter } from "react-router-dom";
+import React,{useState, useEffect} from 'react';
+import { 
+    Route, 
+    Switch, 
+    BrowserRouter as Router,
+    Link,
+    Redirect
+   } from "react-router-dom";
+  // components
+  import Register from './Components/Register';
+  import Login from './Components/Login';
+  import Home from './Components/Home';
+import Dashboard from './Components/Admin/Dashboard';
+import AdminNav from './Components/Navbars/AdminNav';
+import UserNav from './Components/Navbars/UserNav';
+import Customers from './Components/Admin/Customers';
+import Orders from './Components/Admin/Orders';
+import Products from './Components/Admin/Products';
+import Settings from './Components/Admin/Settings';
+const App = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const setAuth = (boolean1) =>{
+    setIsAuthenticated(boolean1)
+  }
 
-import { Login } from "./Components/login";
-import SignUp from "./Components/signup";
-// import Createac from "./Components/createac";
-import axios from 'axios';
-import Form from './Components/Form';
+  // const history = useHistory()
+  const role = localStorage.getItem('role')
 
+  async function isAuth() {
+    try {
+      const res = await fetch(`http://localhost:5000/auth/verify`,{
+        method : 'POST',
+        headers : {jwt_token : localStorage.token}
+      })
+      const parseRes = await res.json()
+      // console.log(parseRes)
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
+      // history.push('/login')
+    } catch (err) {
+      console.error(err.message)
+      
+    }
+  }
+  useEffect(() =>{
+    isAuth()
+  },[])
 
-function App() {
+  // function sidebarHandle(){
+  //   switch(role){
+  //     case 'admin':
+  //       return <AdminNav />;
+  //     default :
+  //       return <UserNav />  
+  //   }
+
+  // }
+
   return (
-    <div className="App">
-    <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container">
-          {/* <li className="nav-item"> */}
-            {/* <link className='nav-link' to={"/create ac"}>create account</link> */}
-          {/* </li> */}
-          {/* <Link className="navbar" to={"/sign-in"}>Home</Link> */}
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}><a href="#" className="nvb">Login</a></Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}><a href="#" className="nvb">Sign up</a></Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/Form"}><a href="#" className="nvb">Create an account</a></Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-     
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <BrowserRouter>
-          <Switch>
-            {/* <Route path="/create account" exact component={Createac} /> */}
-            <Route path="/" exact component={Login} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/form" component={Form}/>
-          </Switch>
-          </BrowserRouter>
-          
-        </div>
-  </div>
-    </div>
+    <>
+      <Router>
+        <Switch>
+          {/* <Home /> */}
+        <Route exact path='/' render={
+            props => !isAuthenticated ? (
+            <Login {...props} setAuth={setAuth}/>
+             ) : (
+             <Redirect to ={{ pathname: '/home' }}/> 
+             )}/>
+
+          <Route exact path='/login' render={
+            props => !isAuthenticated ? (
+            <Login {...props} setAuth={setAuth}/>
+             ) : ( 
+              <Redirect
+              to={{
+                pathname: "/home"
+              }}
+            />
+             )}/>
+
+          <Route exact path='/register' render={
+            props => !isAuthenticated ? (
+            <Register {...props} setAuth={setAuth}/>
+            ) : (
+            <Redirect to = {{ pathname: '/login' }} />
+            )} />
+        
+         <Route exact path='/home' render={
+            props => isAuthenticated ? (
+            <Home {...props} setAuth={setAuth}/>
+            ) : (
+              <Redirect to = {{ pathname: '/login' }} />
+            )}>
+            </Route>
+            
+            <Products />
+        </Switch>
+      </Router>
+      </>  
     
-  );
+  )
 }
-export default App;
+
+export default App
