@@ -38,8 +38,17 @@ import {Link, useHistory} from 'react-router-dom'
             }else{
             localStorage.setItem('token', parseRes?.jwtToken);
             localStorage.setItem('role',parseRes?.role)
-              setAuth(true)
+            localStorage.setItem('email',parseRes?.email)
+            localStorage.setItem('name',parseRes?.name)
+            localStorage.setItem('mobile',parseRes?.mobile)
+
+            const role = localStorage.getItem('role',parseRes?.role)
+            if(role === 'admin'){
+              history.push('/dashboard')
+            }else{
               history.push('/home')
+            }
+              setAuth(true)
             }
             
             // history.push('/home')

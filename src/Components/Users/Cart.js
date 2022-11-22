@@ -1,13 +1,12 @@
 import React from 'react'
 import NavBar from '../Navbars/NavBar'
 
-const About = () => {
+const Collection = () => {
   return (
     <div>
       <NavBar />
-      <center>About</center>
-      </div>
+      <center>Collection</center></div>
   )
 }
 
-export default About
+export default Collection
