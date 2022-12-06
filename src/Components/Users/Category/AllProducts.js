@@ -3,14 +3,16 @@ import NavBar from '../../Navbars/NavBar'
 import Search from './Search'
 import Card from './Card'
 
-const AllProducts = (props) => {
-  // const [data, setData] = useState([])
+const AllProducts = ({product}) => {
   return (
-    <div>
+    <div className='d-flex flex-wrap' style={{zIndex:'-9999',position:'absolute',top:'90px'}}>
       {
-        props.data?.map(productData => {
-          console.log(productData)
-          return <Card product={productData} />
+        product?.map(productData => {
+          return (
+            <div className='col-md-4'>
+          <Card productItem={productData} />
+          </div>
+          )
         })
       }
         </div>

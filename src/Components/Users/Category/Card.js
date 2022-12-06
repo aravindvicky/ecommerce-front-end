@@ -1,28 +1,45 @@
-import React from 'react'
-import NavBar from '../../Navbars/NavBar'
+import React, { useState } from 'react'
 import './card.css'
-import Mobile from '../images/mobile-app.png'
+import { useHistory } from 'react-router-dom';
+import Productpage from './Productpage';
 
-const Card = (props) => {
-    const {product} = props
+const Card = (props,id) => {
+    const [cart, setCart] = useState([])
+    const [itemIndex, setItemIndex] = useState(1)
+
+    const history = useHistory()
+    const {productItem} = props;
+
+    const onClickHandler = async(id) =>{
+        console.log(id)
+        history.push(`/product-page/${id}`)
+    }
+
   return (
     <>
-    <NavBar />
-     <div className="card">
-        <img src={product.image_url} alt="" width='200' />
-        <div className="card-body">
-          <h2>{product.poduct_name}</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
-          {/* <h5>{author}</h5> */}
+    <div onClick={(() => onClickHandler((productItem.id)))}>
+    <div className="card">
+        <div>
+        <p>{productItem.product_name}</p>
+        <span>{productItem.description}</span>
         </div>
+        <img src={productItem.image_url} alt="" />
+        <div className="card-body">
+        <h5>{productItem.price}</h5>
+        <p>{productItem.features}</p>
+        </div>
+
+        {/* {cart.length === 0 && <p>Cart: (empty)</p>}
+        {cart.length > 0 && <p>Cart: {cart.toString()}</p>} */}
+
+        <button className='btn btn-primary'
+        onClick={() => {
+            setCart([...cart, ` item ${itemIndex}`]);
+            setItemIndex(itemIndex + 1);}}>Buy now</button>
       </div>
-    </>
-   
+    </div>
+    
+    </> 
   )
 }
-
 export default Card

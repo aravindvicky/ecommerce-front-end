@@ -23,9 +23,10 @@ import About from './Components/Users/About';
 import Cart from './Components/Users/Cart';
 import Contact from './Components/Users/Contact';
 import Home from './Components/Users/Home';
-import AllProducts from './Components/Users/Category/AllProducts';
-import Card from './Components/Users/Category/Card';
+// import AllProducts from './Components/Users/Category/AllProducts';
+// import Card from './Components/Users/Category/Card';
 import Ecommerce from './Components/Users/Category/Ecommerce';
+import Productpage from './Components/Users/Category/Productpage';
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
   const setAuth = (boolean1) =>{
@@ -100,6 +101,7 @@ const App = () => {
             {/* <Route path='/products' component={AllProducts} /> */}
             {/* <Route path='/card' component={Card} /> */}
             <Route path='/ecommerce' component={Ecommerce} />
+            <Route path='/product-page' component={Productpage} />
         </Switch>
       </Router>
       </>  

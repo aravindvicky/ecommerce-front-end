@@ -92,3 +92,4 @@ body {
 /* .dropdown__info ul li:last-child {
   border: none;
 } */
+.navbar {position: fixed;width: 100%;z-index: 9999;top:0;}

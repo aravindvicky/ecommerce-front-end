@@ -7,7 +7,7 @@
   
   .card {
     background: #fff;
-    width: 24em;
+    width: 20em;
     border-radius: 0.6em;
     margin: 1em;
     overflow: hidden;
@@ -22,9 +22,10 @@
   }
   
   .card img {
-    width: 50%;
-    object-fit: cover;
-    margin: 0 auto;
+    width: 30%;
+    /* object-fit: cover; */
+    /* margin: 0 auto; */
+    margin-left: 20px;
   }
   
   .card h2 {
