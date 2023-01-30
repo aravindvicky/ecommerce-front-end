@@ -1,16 +1,10 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import React,{useState, useEffect} from 'react';
-import { 
-    Route, 
-    Switch, 
-    BrowserRouter as Router,
-    Link,
-    Redirect
-   } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router,Link,Redirect} from "react-router-dom";
   // components
-  import Register from './Components/Register';
-  import Login from './Components/Login';
+import Register from './Components/Register';
+import Login from './Components/Login';
 import Dashboard from './Components/Admin/Dashboard';
 import Productlist from './Components/Admin/Productlist'
 import Customers from './Components/Admin/Customers';
@@ -27,8 +21,10 @@ import Home from './Components/Users/Home';
 // import Card from './Components/Users/Category/Card';
 import Ecommerce from './Components/Users/Category/Ecommerce';
 import Productpage from './Components/Users/Category/Productpage';
+
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const setAuth = (boolean1) =>{
     setIsAuthenticated(boolean1)
   }
@@ -36,13 +32,12 @@ const App = () => {
     try {
       const res = await fetch(`http://localhost:5000/auth/verify`,{
         method : 'POST',
-        headers : {jwt_token : localStorage.token}
+        headers : {jwt_token : sessionStorage.token}
       })
       const parseRes = await res.json()
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
     } catch (err) {
       console.error(err.message)
-      
     }
   }
   useEffect(() =>{

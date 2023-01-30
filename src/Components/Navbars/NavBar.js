@@ -30,14 +30,14 @@ const NavBar = ({setAuth}) => {
 
   const logout = (e) =>{
     e.preventDefault()
-    localStorage.clear()
+    sessionStorage.clear()
     history.push('/login')
     // setAuth(false)
   }
-  const role = localStorage.getItem('role')
-  const email = localStorage.getItem('email')
-  const mobile = localStorage.getItem('mobile')
-  const name = localStorage.getItem('name')
+  const role = sessionStorage.getItem('role')
+  const email = sessionStorage.getItem('email')
+  const mobile = sessionStorage.getItem('mobile')
+  const name = sessionStorage.getItem('name')
   return (
     <>
     <div>

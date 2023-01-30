@@ -1,6 +1,6 @@
-import React,{useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
-import NavBar from '../Navbars/NavBar'
+import React,{useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
+import NavBar from '../Navbars/NavBar';
 
 const EditProducts = () => {
     const [formValues, setFormValues] = useState({
@@ -12,6 +12,7 @@ const EditProducts = () => {
         category:'',
         })
     const {id} = useParams();
+    
     const getData = async() =>{
       console.log(id)
       const response = await fetch(`http://localhost:5000/auth/get/${id}`,{
@@ -22,34 +23,35 @@ const EditProducts = () => {
       // console.log(res[0],"res")
       setFormValues(res[0])
       }
-    useEffect(()=>{
+
+    useEffect(() =>{
         getData()
     },[])
+
     const onChange = (e) =>{
         setFormValues({
             ...formValues,[e.target.name] : e.target.value
         })
     }
+
     const onSubmitvalues = async () =>{
         try {
             const update = await fetch(`http://localhost:5000/auth/update`,{
                 method: 'POST',
-                headers: {'Content-Type' : 'application/json'}
+                headers: { 'Content-Type' : 'application/json' }
             })
             const parseRes = await update.json()
-            console.log(parseRes)
-            
+            console.log(parseRes)    
         } catch (err) {
             console.error(err.message)
         }
     }
   return (
-    <>
+       <>
         <NavBar />
         <center className="mt-4">
           <h1>Edit Products</h1>
           </center>
-
           <div>
           <div className='productpage'>
           <div className="somecla">
@@ -102,15 +104,13 @@ const EditProducts = () => {
       <button type="submit" class="btn btn-primary" onClick={onSubmitvalues}>Submit</button>
       </div>
       <div className='col-md-2'></div>
-
       </div>
           </div>
-          </div>
-          
+          </div>  
     </div>
+
     </>
-    
-  )
-}
+
+    )}
 
 export default EditProducts

@@ -8,8 +8,6 @@ const Register = ({setAuth}) => {
         mobile:'',
         country:'',
         password: '',
-        
-
     })
     const { email, password, mobile, name,country } = inputs;
     const history = useHistory()
@@ -34,11 +32,11 @@ const Register = ({setAuth}) => {
             })
             const parseRes = await res.json()
             console.log(parseRes)
-            localStorage.setItem('token', parseRes.jwtToken)
-            localStorage.setItem('role', parseRes.role)
-            localStorage.setItem('email',parseRes.email)
-            localStorage.setItem('name',parseRes?.name)
-            localStorage.setItem('mobile',parseRes?.mobile)
+            sessionStorage.setItem('token', parseRes.jwtToken)
+            sessionStorage.setItem('role', parseRes.role)
+            sessionStorage.setItem('email',parseRes.email)
+            sessionStorage.setItem('name',parseRes?.name)
+            sessionStorage.setItem('mobile',parseRes?.mobile)
             console.log(parseRes)
             setAuth(false)
             history.push('/login')

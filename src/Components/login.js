@@ -1,14 +1,11 @@
 import React,{useState, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 
-
  const Login = ({ setAuth }) => {
-
-    const [formValues, setFormValues ] = useState({
+    const [formValues, setFormValues] = useState({
         email :'',
-        password :''
+        password :'',
     })
-
     const {email, password} = formValues;
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -27,7 +24,9 @@ import {Link, useHistory} from 'react-router-dom'
             const body = {email, password}
             const res = await fetch (`http://localhost:5000/auth/login`,{
                 method : 'POST',
-                headers : { 'Content-Type': 'application/json'},
+                headers : { 
+                  'Content-Type': 'application/json'
+                },
                 body : JSON.stringify(body)
             })
             const parseRes = await res.json()
@@ -36,13 +35,13 @@ import {Link, useHistory} from 'react-router-dom'
               // history.replace('/login');
               return window.alert('Enter valid credentials');
             }else{
-            localStorage.setItem('token', parseRes?.jwtToken);
-            localStorage.setItem('role',parseRes?.role)
-            localStorage.setItem('email',parseRes?.email)
-            localStorage.setItem('name',parseRes?.name)
-            localStorage.setItem('mobile',parseRes?.mobile)
-
-            const role = localStorage.getItem('role',parseRes?.role)
+            sessionStorage.setItem('token', parseRes?.jwtToken)
+            sessionStorage.setItem('role',parseRes?.role)
+            sessionStorage.setItem('email',parseRes?.email)
+            sessionStorage.setItem('name',parseRes?.name)
+            sessionStorage.setItem('mobile',parseRes?.mobile)
+            
+            const role = sessionStorage.getItem('role',parseRes?.role)
             if(role === 'admin'){
               history.push('/dashboard')
             }else{
@@ -50,7 +49,6 @@ import {Link, useHistory} from 'react-router-dom'
             }
               setAuth(true)
             }
-            
             // history.push('/home')
         } catch (err) {
             console.error(err.message)
@@ -58,7 +56,6 @@ import {Link, useHistory} from 'react-router-dom'
     }
 
     useEffect(() => {
-        // console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
           console.log(formValues);
         }
@@ -83,10 +80,9 @@ import {Link, useHistory} from 'react-router-dom'
       };
   return (
     <>
-        <div className="auth-wrapper">
-        <div className="auth-inner">
+    <div className="auth-wrapper">
+    <div className="auth-inner">
     <h1 className='text-center'>Login</h1>
-    
     <form onSubmit={onSubmitvalues}>
     <div className='form-group'>
     <input 

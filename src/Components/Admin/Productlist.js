@@ -17,9 +17,7 @@ const Productlist = () => {
     // console.log(setData)
 
   }
-
   // console.log(Object.values(data));
-
       useEffect(() =>{
         productData()
       },[])

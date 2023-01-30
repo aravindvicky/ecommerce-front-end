@@ -4,9 +4,11 @@ import NavBar from '../Navbars/NavBar'
 const Customers = () => {
   const [data, setData] = useState([])
   const customerData = async () =>{ 
-    const data = await fetch(`http://localhost:5000/auth//all-customers`,{
+    const data = await fetch(`http://localhost:5000/auth/all-customers`,{
       method:'GET',
-      headers:{'Content-Type' : 'application/json'}
+      headers:{
+        'Content-Type' : 'application/json'
+      }
     })
     const res = await data.json()
     console.log(res, "hellooo buddy")
@@ -53,7 +55,6 @@ const Customers = () => {
                                       {Object.keys(item).map((item2,index2)=>
                                          <td>{item?.[item2]}</td>
                                       )
-                                      
                                       }
                                     </tr>
                                   )
@@ -63,7 +64,6 @@ const Customers = () => {
                    </table>
           </div>
         </div>
-                    
                 </div>
       </div>
     </>

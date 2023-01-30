@@ -1,22 +1,12 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom'
 import NavBar from '../../Navbars/NavBar'
 
-const Productpage = () => {
-    const [data, setData] = useState({})
-    const getData = async(id) =>{
-        const res = await fetch(`http://localhost:5000/auth/get/${id}`,{
-            method: 'GET',
-            headers: {'Content-Type' : 'application/json'}
-        })
-        const parseRes = await res.json()
-        console.log(parseRes)
-        setData(parseRes)
-    }
-    console.log(data)
+const Productpage = () => {    
+
   return (
     <>
     <NavBar />
-    <h1 style={{marginTop:'70px'}}>Hello</h1>
     </>
   )}
-export default Productpage
+export default Productpage;
